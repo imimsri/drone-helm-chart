@@ -1,0 +1,24 @@
+{{- if .Values.ingressRoute.enabled  }}
+{{- $fullName := include "drone.fullname" . }}
+{{- $httpPort := .Values.service.httpPort }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}-route
+  labels:
+    app: {{ $fullName }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`{{.Values.ingressRoute.host}}`)
+    kind: Rule
+    services:
+    - name: {{ $fullName }}
+      port: {{ $httpPort }}
+  tls:
+{{ toYaml .Values.ingressRoute.tls | indent 4 }}
+{{- end -}}

@@ -22,6 +22,10 @@
                 key: {{ .Values.sourceControl.gitlab.clientSecretKey }}
 {{- end -}}
 {{- if eq .Values.sourceControl.provider "gitea" -}}
+          - name: DRONE_GITEA_CLIENT_ID
+            value: {{ .Values.sourceControl.gitea.clientID }}
+          - name: DRONE_GITEA_CLIENT_SECRET
+            value: {{ .Values.sourceControl.gitea.clientSecret }}
           - name: DRONE_GITEA_SERVER
             value: {{ .Values.sourceControl.gitea.server }}
 {{- end -}}

@@ -72,6 +72,12 @@ ingress:
   #     hosts:
   #       - drone.domain.io
 
+ingressRoute:
+  enabled: false
+#  host:
+#  tls:
+#    certResolver: default
+    
 sourceControl:
   ## your source control provider: github,gitlab,gitea,gogs,bitbucketCloud,bitbucketServer
   provider:
@@ -94,6 +100,10 @@ sourceControl:
     clientSecretValue:
     server:
   gitea:
+    clientID:
+    clientSecret:
+    clientSecretKey: clientSecret
+    clientSecretValue:
     server:
   gogs:
     server:
